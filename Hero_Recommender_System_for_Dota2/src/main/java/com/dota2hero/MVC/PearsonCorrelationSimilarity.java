@@ -1,7 +1,7 @@
 package com.dota2hero.MVC;
 
 import java.util.List;
-//this function is used to calculate the Pearson correlation similarity.
+
 public class PearsonCorrelationSimilarity implements SimilarityStrategy {
 	double similarity;
 	public double computeSimilarity(DataBase f, String player1, String player2) {
