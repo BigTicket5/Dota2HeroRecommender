@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Handles requests for the application home page.
@@ -23,7 +24,7 @@ public class RecommenderController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -34,7 +35,14 @@ public class RecommenderController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "mainPage";
+	}
+	// Return result
+	@RequestMapping("/Recresult")
+	public String Recresult(@RequestParam("id") String id){
+		System.out.println(id);
+		return id;
+		
 	}
 	
 }
