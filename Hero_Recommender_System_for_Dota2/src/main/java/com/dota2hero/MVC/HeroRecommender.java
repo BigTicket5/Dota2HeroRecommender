@@ -29,13 +29,13 @@ public class HeroRecommender {
 						c1.getContribution());
 			}
 		});
-		int i = 0;
-		for (Contribution c : l.subList(0, 5)) {
-			if (i < 10000) {
-				System.out.println(c.toString());
-				i++;
-			}
-		}
+//		int i = 0;
+//		for (Contribution c : l.subList(0, 5)) {
+//			if (i < 10000) {
+//				System.out.println(c.toString());
+//				i++;
+//			}
+//		}
 		return l.subList(0, 5);
 	}
 
