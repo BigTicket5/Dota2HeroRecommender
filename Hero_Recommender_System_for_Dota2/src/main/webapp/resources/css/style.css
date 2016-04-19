@@ -132,7 +132,7 @@ label {
  -moz-transition-duration: 0.3s; 
  transition-duration: 0.3s; 
 } 
-.cd-user-modal-container .cd-inputid p{ 
+.cd-user-modal-container .cd-inputid table{ 
  text-align: center; 
  font-family:Verdana;
  font-size:0.8em;

@@ -7,6 +7,8 @@ import java.util.List;
 public class Player {
 	private String playerId;
 	
+	public Player() {
+	}
 	public Player(String playerId) {
 		super();
 		this.playerId = playerId;
