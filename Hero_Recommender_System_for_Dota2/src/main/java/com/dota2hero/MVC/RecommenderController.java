@@ -1,8 +1,10 @@
 package com.dota2hero.MVC;
 
+
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Handles requests for the application home page.
@@ -30,26 +33,23 @@ public class RecommenderController {
 	}
 
 	// submit accountid
-	@RequestMapping(value = "/AccountIdValid", method = RequestMethod.POST)
-	public String AccountIdvalid(@ModelAttribute("player") Player player,
-			BindingResult bindingResult) {
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"Beans.xml");
-		MatchJDBCTemplate matchjdbctemplate = (MatchJDBCTemplate) context
-				.getBean("MatchJDBCTemplate");
-		int count = matchjdbctemplate.getMatchCount(player.getPlayerId());
-		if(count>0)
-			return "1";
+	@RequestMapping(value = "/main", method = RequestMethod.POST)
+	public String AccountIdvalid(@ModelAttribute Player player,Model model,RedirectAttributes reattr) {
+		HeroRecommender hr = new HeroRecommender();
+		if(hr.isExistPlayer(player.getPlayerId()))
+		{
+			reattr.addAttribute("inPlayer",player);
+			return "redirect:/Recresult";
+		}
 		else
-			return "mainPage";
+			return "1";
 	}
-
 	// Return result
-	@RequestMapping("/Recresult")
-	public String Recresult(@RequestParam("id") String id) {
-		System.out.println(id);
-		return id;
-
+	@RequestMapping(value="/Recresult" , method = RequestMethod.GET)
+	public String Recresult(@ModelAttribute("inPlayer") Player player,Model model) {
+		List<Contribution> listcon =HeroRecommender.recommendBasedCosineSimilarity(player.getPlayerId());
+		model.addAttribute("rescon", listcon);
+		return "Recresult";
 	}
 
 }

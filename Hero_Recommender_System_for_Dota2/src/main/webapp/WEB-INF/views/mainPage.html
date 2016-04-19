@@ -1,8 +1,7 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="resources/css/style.css"/>
 <script type="text/javascript"
 	src="resources/scripts/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="resources/scripts/jquery-ui.min.js"></script>
@@ -92,7 +91,7 @@
 		<div class="round-parent">
 			<div class="round-button">
 				<div class="round-button-circle">
-					<a id="yesbutton" href="#0" class="round-button"
+					<a id="yesbutton" href="#" class="round-button"
 						title="Recommender heros based on your pre-match records!">Yes</a>
 				</div>
 			</div>
@@ -102,7 +101,7 @@
 			</div>
 			<div class="round-button">
 				<div class="round-button-circle">
-					<a href="http://example.com" class="round-button"
+					<a href="#" class="round-button"
 						title="Choose your favorite hero type!">No</a>
 				</div>
 			</div>
@@ -111,15 +110,14 @@
 			<div class="cd-user-modal-container">
 				<div class="cd-inputid">
 					<div class="cd-input-title">ACCOUNTID</div>
-					<form:form class="cd-form" id="accform"
-						action="/Recommender/AccountIdValid" method="post"
-						modelAttribute="player">
+					<form  class="cd-form" id="accform"
+						action="#" th:action="@{/main}" th:object="${player}" method="post">
 						<table style="margin: 0 auto;">
 							<tr>
 								<td>Please enter your account ID:</td>
-								<td><form:input id="accountid" path="playerId"
+								<td><input id="accountid"
 										name="accountid" type="text"
-										style="padding:5px;margin-left:15px;" /></td>
+										style="padding:5px;margin-left:15px;" th:field="*{playerId}" /></td>
 							</tr>
 							<tr>
 								<td><input id="submit" type="submit" value="Confirm"
@@ -128,12 +126,12 @@
 									class="btn-class" /></td>
 							</tr>
 						</table>
-					</form:form>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<footer>Copyright 2016 Zhang&Mao </footer>
+	<footer>Copyright 2016 Zhang and Mao </footer>
 
 </body>
 </html>

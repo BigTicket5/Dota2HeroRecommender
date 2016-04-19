@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="resources/css/style.css"/>
+</head>
+<body>
+<header>
+		<h1>Hero Recommender</h1>
+	</header>
+	<div id="mainpage">
+	<h1>Result</h1>
+    <p th:text="'id: ' + ${inPlayer.getPlayerId()}" />
+    <table>
+    	<tr><th>HeroID</th><th>ConRate</th></tr>
+    	<tr th:each="con :${rescon}">
+    	<td th:text="${con.heroId}">HeroID</td>
+    	<td th:text="${con.contribution}">ConRate</td>
+    	</tr>
+    </table>
+    </div>
+    <footer>Copyright 2016 Zhang and Mao </footer>
+</body>
+</html>
