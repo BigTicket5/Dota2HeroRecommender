@@ -1,176 +1,328 @@
 header {
-    background-color:black;
-    color:white;
-    text-align:center;
-	font-family:Verdana, sans-serif;
-	width:100%;
-	height:100px;
-	position:fixed;
-	top:0;
-	left:0;
-}
-footer {
-    background-color:black;
-    color:white;
-    text-align:center;
-	clear: both;
-	width:100%;
-	height:20px;
-	position:fixed;
-	bottom:0;
-	left:0;
-}
-#mainpage{
-	width: 100%;
-	margin: 100px auto -20px;
-	height:auto;
-	background-color:white;
-	float:left;
-}
-#signboard{
-	width:300px;
-	height:300px;
-	background-image:url(../img/mainIcon.png);
-	margin-top:50px;
-	margin-left:auto;
-	margin-right:auto;
-	overflow:hidden;
-}
-.Three-Dee{
-font-family: ABeeZee ;
-line-height: 1em;
-color: undefined;
-font-size: 2em;
-text-shadow:0px 0px 0 rgb(221,221,221),1px 1px 0 rgb(197,197,197),2px 2px 0 rgb(174,174,174),3px 3px 0 rgb(150,150,150),4px 4px 0 rgb(126,126,126),5px 5px 0 rgb(102,102,102), 6px 6px 0 rgb(78,78,78),7px 7px 6px rgba(0,0,0,0.15),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
-}
-.round-parent { width:50%;height:auto;margin:0 auto;text-align:center;}
-.round-button {
-	width:10%;
-	display:inline-block;
-}
-.round-button-circle {
-	width: 100%;
-	height:0;
-	padding-bottom: 100%;
-    border-radius: 50%;
-	border:10px solid #cfdcec;
-    overflow:hidden;
-    
-    background: #4679BD; 
-    box-shadow: 0 0 0 gray;
-}
-.round-button-circle:hover {
-	background:#30588e;
-}
-.round-button a {
-    display:block;
-	float:left;
-	width:100%;
-	padding-top:50%;
-    padding-bottom:50%;
-	line-height:1em;
-	margin-top:-0.5em;
-    
-	text-align:center;
-	color:#e2eaf3;
-    font-family:Verdana;
-    font-size:1.2em;
-    font-weight:bold;
-    text-decoration:none;
-}
-label {
-    display: inline-block;
-    width: 5em;
-  }
-  
-  .cd-user-modal { 
- position: fixed; 
- top: 0; 
- left: 0; 
- width: 100%; 
- height: 100%; 
- background: rgba(52, 54, 66, 0.9); 
- z-index: 3; 
- overflow-y: auto; 
- cursor: default; 
- visibility: hidden; 
- opacity: 0; 
- -webkit-transition: opacity 0.3s 0, visibility 0 0.3s; 
- -moz-transition: opacity 0.3s 0, visibility 0 0.3s; 
- transition: opacity 0.3s 0, visibility 0 0.3s; 
-} 
-.cd-user-modal.is-visible { 
- visibility: visible; 
- opacity: 1; 
- -webkit-transition: opacity 0.3s 0, visibility 0 0; 
- -moz-transition: opacity 0.3s 0, visibility 0 0; 
- transition: opacity 0.3s 0, visibility 0 0; 
-} 
-.cd-user-modal.is-visible .cd-user-modal-container { 
- -webkit-transform: translateY(0); 
- -moz-transform: translateY(0); 
- -ms-transform: translateY(0); 
- -o-transform: translateY(0); 
- transform: translateY(0); 
-} 
-  
-.cd-user-modal-container {	
- width: 90%; 
- max-width: 600px; 
- background: #FFF; 
- cursor: auto; 
- border-radius: 0.25em; 
- -webkit-transform: translateY(-30px); 
- -moz-transform: translateY(-30px); 
- -ms-transform: translateY(-30px); 
- -o-transform: translateY(-30px); 
- transform: translateY(-30px); 
- -webkit-transition-property: -webkit-transform; 
- -moz-transition-property: -moz-transform; 
- transition-property: transform; 
- -webkit-transition-duration: 0.3s; 
- -moz-transition-duration: 0.3s; 
- transition-duration: 0.3s; 
-} 
-.cd-user-modal-container .cd-inputid table{ 
- text-align: center; 
- font-family:Verdana;
- font-size:0.8em;
- font-weight:bold;
- color:#8C8C8C;
-} 
-.cd-input-title {
-	height:auto;
+	background-color: black;
+	color: white;
 	text-align: center;
-	font-family:Verdana;
-	font-size:1em;
-	font-weight:bold;
-	color:white;
-	background-color:gray;
-}
-.btn-class{
- display: inline-block;
- border:1px solid #BFBFBF;
- color: #8C8C8C;
- width:100px;
- border-radius: 30px;
- -webkit-border-radius: 30px;
- -moz-border-radius: 30px;
- font-family: Verdana;
- height: auto;
- font-size: 16px;
- padding: 7px 20px;
- background-color: #FCFAF9;
- outline:none;
-}
-.btn-class:hover, .btn-class:active{
- border:1px solid #BFBFBF;
- color: #8C8C8C;
- background-color: #E8E8E8;
- cursor:pointer;
-}
-.my-error-class {
-    color:#FF0000;  /* red */
-	padding-left:15px;
+	font-family: Verdana, sans-serif;
+	width: 100%;
+	height: 100px;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 
+footer {
+	background-color: black;
+	color: white;
+	text-align: center;
+	clear: both;
+	width: 100%;
+	height: 20px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}
+
+#mainpage {
+	width: 100%;
+	margin: 100px auto -20px;
+	height: auto;
+	background-color: white;
+	float: left;
+}
+video#bgVideo{
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	background-size: cover;
+	-webkit-filter: blur(10px);
+	opacity:0.1;
+}
+
+#signboard {
+	width: 300px;
+	height: 300px;
+	background-image: url(../img/mainIcon.png);
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+}
+
+.Three-Dee {
+	font-family: ABeeZee;
+	line-height: 1em;
+	color: undefined;
+	font-size: 2em;
+	text-shadow: 0px 0px 0 rgb(221, 221, 221), 1px 1px 0 rgb(197, 197, 197),
+		2px 2px 0 rgb(174, 174, 174), 3px 3px 0 rgb(150, 150, 150), 4px 4px 0
+		rgb(126, 126, 126), 5px 5px 0 rgb(102, 102, 102), 6px 6px 0
+		rgb(78, 78, 78), 7px 7px 6px rgba(0, 0, 0, 0.15), 7px 7px 1px
+		rgba(0, 0, 0, 0.5), 0px 0px 6px rgba(0, 0, 0, .2);
+}
+
+.round-parent {
+	width: 50%;
+	height: auto;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.round-button {
+	width: 10%;
+	display: inline-block;
+}
+
+.round-button-circle {
+	width: 100%;
+	height: 0;
+	padding-bottom: 100%;
+	border-radius: 50%;
+	border: 10px solid #cfdcec;
+	overflow: hidden;
+	background: #4679BD;
+	box-shadow: 0 0 0 gray;
+}
+
+.round-button-circle:hover {
+	background: #30588e;
+}
+
+.round-button a {
+	display: block;
+	float: left;
+	width: 100%;
+	padding-top: 50%;
+	padding-bottom: 50%;
+	line-height: 1em;
+	margin-top: -0.5em;
+	text-align: center;
+	color: #e2eaf3;
+	font-family: Verdana;
+	font-size: 1.2em;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+label {
+	display: inline-block;
+	width: 5em;
+}
+
+.cd-user-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(52, 54, 66, 0.9);
+	z-index: 3;
+	overflow-y: auto;
+	cursor: default;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s 0, visibility 0 0.3s;
+	-moz-transition: opacity 0.3s 0, visibility 0 0.3s;
+	transition: opacity 0.3s 0, visibility 0 0.3s;
+}
+
+.cd-user-modal.is-visible {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition: opacity 0.3s 0, visibility 0 0;
+	-moz-transition: opacity 0.3s 0, visibility 0 0;
+	transition: opacity 0.3s 0, visibility 0 0;
+}
+
+.cd-user-modal.is-visible .cd-user-modal-container {
+	-webkit-transform: translateY(0);
+	-moz-transform: translateY(0);
+	-ms-transform: translateY(0);
+	-o-transform: translateY(0);
+	transform: translateY(0);
+}
+
+.cd-user-modal-container {
+	width: 90%;
+	max-width: 600px;
+	background: #FFF;
+	cursor: auto;
+	border-radius: 0.25em;
+	-webkit-transform: translateY(-30px);
+	-moz-transform: translateY(-30px);
+	-ms-transform: translateY(-30px);
+	-o-transform: translateY(-30px);
+	transform: translateY(-30px);
+	-webkit-transition-property: -webkit-transform;
+	-moz-transition-property: -moz-transform;
+	transition-property: transform;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+}
+
+.cd-user-modal-container .cd-inputid table {
+	text-align: center;
+	font-family: Verdana;
+	font-size: 0.8em;
+	font-weight: bold;
+	color: #8C8C8C;
+}
+
+.cd-input-title {
+	height: auto;
+	text-align: center;
+	font-family: Verdana;
+	font-size: 1em;
+	font-weight: bold;
+	color: white;
+	background-color: gray;
+}
+
+.btn-class {
+	display: inline-block;
+	border: 1px solid #BFBFBF;
+	color: #8C8C8C;
+	width: 100px;
+	border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	font-family: Verdana;
+	height: auto;
+	font-size: 16px;
+	padding: 7px 20px;
+	background-color: #FCFAF9;
+	outline: none;
+}
+
+.btn-class:hover, .btn-class:active {
+	border: 1px solid #BFBFBF;
+	color: #8C8C8C;
+	background-color: #E8E8E8;
+	cursor: pointer;
+}
+
+.my-error-class {
+	color: #FF0000; /* red */
+	padding-left: 15px;
+}
+
+.blur img {
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	transition: all 1s ease;
+}
+
+.blur img:hover {
+	-webkit-filter: blur(10px);
+}
+
+.myImg {
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+	img-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	transition: all 1s ease;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+.modal img:hover {
+	-webkit-filter: none;
+}
+
+/* Modal Content (image) */
+.modal-content {
+	margin: 5% auto;
+	display: block;
+	width: 80%;
+	max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+	margin: auto;
+	display: block;
+	width: 80%;
+	max-width: 700px;
+	text-align: center;
+	color: #ccc;
+	padding: 10px 0;
+	height: 150px;
+	font-size: 2em;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+	-webkit-animation-name: zoom;
+	-webkit-animation-duration: 0.6s;
+	animation-name: zoom;
+	animation-duration: 0.6s;
+}
+
+@
+-webkit-keyframes zoom {
+	from {-webkit-transform: scale(0)
+}
+
+to {
+	-webkit-transform: scale(1)
+}
+
+}
+@
+keyframes zoom {
+	from {transform: scale(0.1)
+}
+
+to {
+	transform: scale(1)
+}
+
+}
+
+/* The Close Button */
+.close {
+	position: absolute;
+	top: 15px;
+	right: 35px;
+	color: #f1f1f1;
+	font-size: 40px;
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.close:hover, .close:focus {
+	color: #bbb;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+	.modal-content {
+		width: 100%;
+	}
+}

@@ -1,6 +1,7 @@
 package com.dota2hero.MVC;
 
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -34,7 +35,7 @@ public class RecommenderController {
 
 	// submit accountid
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
-	public String AccountIdvalid(@ModelAttribute Player player,Model model,RedirectAttributes reattr) {
+	public String AccountIdvalid(@ModelAttribute Player player,Model model,RedirectAttributes reattr) throws FileNotFoundException {
 		HeroRecommender hr = new HeroRecommender();
 		if(hr.isExistPlayer(player.getPlayerId()))
 		{
@@ -46,9 +47,13 @@ public class RecommenderController {
 	}
 	// Return result
 	@RequestMapping(value="/Recresult" , method = RequestMethod.GET)
-	public String Recresult(@ModelAttribute("inPlayer") Player player,Model model) {
+	public String Recresult(@ModelAttribute("inPlayer") Player player,Model model) throws FileNotFoundException {
 		List<Contribution> listcon =HeroRecommender.recommendBasedCosineSimilarity(player.getPlayerId());
-		model.addAttribute("rescon", listcon);
+		List<Contribution> listperson = HeroRecommender.recommendBasedPearsonCorrelationSimilarity(player.getPlayerId());
+		List<RecommenderResult> lcr = HeroRecommender.getResult(listcon);
+		List<RecommenderResult> lpr = HeroRecommender.getResult(listperson);
+		model.addAttribute("rescon", lcr);
+		model.addAttribute("resper", lpr);
 		return "Recresult";
 	}
 

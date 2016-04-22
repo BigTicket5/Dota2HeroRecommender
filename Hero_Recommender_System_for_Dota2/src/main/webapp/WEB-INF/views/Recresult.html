@@ -1,25 +1,81 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="resources/css/style.css"/>
+<title>Getting Started: Handling Form Submission</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="resources/css/style.css" />
+<script type="text/javascript"
+	src="resources/scripts/jquery-2.2.3.min.js"></script>
+<script>
+	$(document).ready(function($) {
+		// Get the modal
+		var modal = document.getElementById('myModal');
+
+		// Get the image and insert it inside the modal - use its "alt" text as a caption
+		var captionText = $("#caption");
+		$('.myImg').click(function() {
+			modal.style.display = "block";
+			var path = $(this).attr("src");
+			path = path.replace($(this).attr("name"),$(this).attr("name")+"2");
+			path = path.replace("img","img/largeimg");
+			$("#imgsx").attr("src", path);
+			var imgalt = new Number($(this).attr("alt"));
+			$("#caption").html("Your predicted contribution of \""+$(this).attr("name")+"\" is "+
+					imgalt.toFixed(4));
+
+		});
+		$('.close').click(function() {
+			modal.style.display = "none";
+		});
+	});
+</script>
 </head>
 <body>
-<header>
+	<header>
 		<h1>Hero Recommender</h1>
 	</header>
 	<div id="mainpage">
-	<h1>Result</h1>
-    <p th:text="'id: ' + ${inPlayer.getPlayerId()}" />
-    <table>
-    	<tr><th>HeroID</th><th>ConRate</th></tr>
-    	<tr th:each="con :${rescon}">
-    	<td th:text="${con.heroId}">HeroID</td>
-    	<td th:text="${con.contribution}">ConRate</td>
-    	</tr>
-    </table>
-    </div>
-    <footer>Copyright 2016 Zhang and Mao </footer>
+		<h1>Result</h1>
+		<p th:text="'id: ' + ${inPlayer.getPlayerId()}" />
+		<div style="width: 1055px; margin: 0 auto;">
+			<p />
+			<h1>Cosin Similarity</h1>
+			<div class="blur" style="float: left; cursor: pointer;"
+				th:each="con :${rescon}">
+				<table>
+					<tr>
+						<td><img class="myImg" th:name="${con.Heroname}"
+							th:src="@{/resources/img/}+${con.Heroname}+@{.png}"
+							th:alt="${con.contribution}" />
+							<div id="myModal" class="modal">
+								<span class="close">X</span> <img class="modal-content"
+									id="imgsx" />
+								<div id="caption"></div>
+							</div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div style="width: 1055px; margin: 0 auto;">
+			<p />
+			<h1>Person Similarity</h1>
+			<div class="blur" style="float: left; cursor: pointer;"
+				th:each="per :${resper}">
+				<table>
+					<tr>
+						<td><img class="myImg" th:name="${per.Heroname}"
+							th:src="@{/resources/img/}+${per.Heroname}+@{.png}"
+							th:alt="${per.contribution}" />
+							<div id="myModal" class="modal">
+								<span class="close">X</span> <img class="modal-content"
+									id="imgsx" />
+								<div id="caption"></div>
+							</div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<footer>Copyright 2016 Zhang and Mao </footer>
 </body>
 </html>
