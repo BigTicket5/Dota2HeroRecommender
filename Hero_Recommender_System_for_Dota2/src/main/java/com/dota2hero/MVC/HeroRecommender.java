@@ -19,12 +19,12 @@ public class HeroRecommender {
 		HeroRecommender.db = new DataReader("src/main/java/test.csv");
 	}
 	public static void main(String[] args) throws FileNotFoundException {
-		HeroRecommender h = new HeroRecommender();
-		//h.top5HistoryHeros("98");
+		top5HistoryHeros("23");
 	}
 	
-	public List<Contribution> top5HistoryHeros(String playerId) {
-		List<Contribution> l = db.getContributions();
+	public static List<Contribution> top5HistoryHeros(String playerId) {
+		DataReader originalData = new DataReader("src/main/java/test.csv");
+		List<Contribution> l = originalData.getContributions();
 		List<Contribution> specificIdContributions = new ArrayList<Contribution>();
 		for(Contribution c : l) {
 			if(c.getPlayerId().equals(playerId)) {
