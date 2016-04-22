@@ -18,10 +18,31 @@ public class HeroRecommender {
 	{
 		HeroRecommender.db = new DataReader("src/main/java/test.csv");
 	}
-	public static void main(String[] args) {
-		recommendBasedCosineSimilarity("4");
-		recommendBasedPearsonCorrelationSimilarity("4");
+	public static void main(String[] args) throws FileNotFoundException {
+		HeroRecommender h = new HeroRecommender();
+		h.top5HistoryHeros("98");
 	}
+	
+	public List<Contribution> top5HistoryHeros(String playerId) {
+		List<Contribution> l = db.getContributions();
+		List<Contribution> specificIdContributions = new ArrayList<Contribution>();
+		for(Contribution c : l) {
+			if(c.getPlayerId().equals(playerId)) {
+				specificIdContributions.add(c);
+			}
+		}
+		Collections.sort(specificIdContributions, new Comparator<Contribution>() {
+			public int compare(Contribution c1, Contribution c2) {
+				return Double.compare(c2.getContribution(),
+						c1.getContribution());
+			}
+		});
+		for(Contribution c : specificIdContributions.subList(0, 5)) {
+			System.out.println(c.toString());
+		}
+		return specificIdContributions.subList(0, 5);
+	}
+
 
 	public static List<Contribution> recommendBasedCosineSimilarity(
 			String playerId) {
@@ -39,13 +60,6 @@ public class HeroRecommender {
 						c1.getContribution());
 			}
 		});
-//		int i = 0;
-//		for (Contribution c : l.subList(0, 5)) {
-//			if (i < 10000) {
-//				System.out.println(c.toString());
-//				i++;
-//			}
-//		}
 		return l.subList(0, 5);
 	}
 
