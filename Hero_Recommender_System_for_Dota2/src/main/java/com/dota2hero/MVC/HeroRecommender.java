@@ -20,7 +20,7 @@ public class HeroRecommender {
 	}
 	public static void main(String[] args) throws FileNotFoundException {
 		HeroRecommender h = new HeroRecommender();
-		h.top5HistoryHeros("98");
+		//h.top5HistoryHeros("98");
 	}
 	
 	public List<Contribution> top5HistoryHeros(String playerId) {
