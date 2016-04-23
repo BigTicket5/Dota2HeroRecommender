@@ -52,8 +52,10 @@ public class RecommenderController {
 		List<Contribution> listperson = HeroRecommender.recommendBasedPearsonCorrelationSimilarity(player.getPlayerId());
 		List<RecommenderResult> lcr = HeroRecommender.getResult(listcon);
 		List<RecommenderResult> lpr = HeroRecommender.getResult(listperson);
+		List<RecommenderResult> ori = HeroRecommender.top5HistoryHeros(player.getPlayerId());
 		model.addAttribute("rescon", lcr);
 		model.addAttribute("resper", lpr);
+		model.addAttribute("resori", ori);
 		return "Recresult";
 	}
 

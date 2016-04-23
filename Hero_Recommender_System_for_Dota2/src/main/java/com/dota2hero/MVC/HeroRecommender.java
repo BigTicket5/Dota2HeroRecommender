@@ -22,22 +22,28 @@ public class HeroRecommender {
 		top5HistoryHeros("23");
 	}
 	
-	public static List<Contribution> top5HistoryHeros(String playerId) {
+	public static List<RecommenderResult> top5HistoryHeros(String playerId) throws FileNotFoundException {
 		DataReader originalData = new DataReader("src/main/java/test.csv");
+		HashMap<String,String> hlist = new HashMap<String,String>();
+		for(int i=0;i<getHero().size();i++)
+		{
+			hlist.put(getHero().get(i).getId(), getHero().get(i).getLocalized_name());
+		}
 		List<Contribution> l = originalData.getContributions();
-		List<Contribution> specificIdContributions = new ArrayList<Contribution>();
+		List<RecommenderResult> specificIdContributions = new ArrayList<RecommenderResult>();
 		for(Contribution c : l) {
 			if(c.getPlayerId().equals(playerId)) {
-				specificIdContributions.add(c);
+				RecommenderResult tmpr = new RecommenderResult(c.getPlayerId(),hlist.get(c.getHeroId()),c.getContribution());
+				specificIdContributions.add(tmpr);
 			}
 		}
-		Collections.sort(specificIdContributions, new Comparator<Contribution>() {
-			public int compare(Contribution c1, Contribution c2) {
-				return Double.compare(c2.getContribution(),
-						c1.getContribution());
+		Collections.sort(specificIdContributions, new Comparator<RecommenderResult>() {
+			public int compare(RecommenderResult rr1, RecommenderResult rr2) {
+				return Double.compare(rr2.getContribution(),
+						rr2.getContribution());
 			}
 		});
-		for(Contribution c : specificIdContributions.subList(0, 5)) {
+		for(RecommenderResult c : specificIdContributions.subList(0, 5)) {
 			System.out.println(c.toString());
 		}
 		return specificIdContributions.subList(0, 5);

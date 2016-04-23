@@ -39,6 +39,25 @@
 		<p th:text="'id: ' + ${inPlayer.getPlayerId()}" />
 		<div style="width: 1055px; margin: 0 auto;">
 			<p />
+			<h1>Top 5 heros that you use best</h1>
+			<div class="blur" style="float: left; cursor: pointer;"
+				th:each="ori :${resori}">
+				<table>
+					<tr>
+						<td><img class="myImg" th:name="${ori.Heroname}"
+							th:src="@{/resources/img/}+${ori.Heroname}+@{.png}"
+							th:alt="${ori.contribution}" />
+							<div id="myModal" class="modal">
+								<span class="close">X</span> <img class="modal-content"
+									id="imgsx" />
+								<div id="caption"></div>
+							</div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div style="width: 1055px; margin: 0 auto;">
+			<p />
 			<h1>Cosin Similarity</h1>
 			<div class="blur" style="float: left; cursor: pointer;"
 				th:each="con :${rescon}">
