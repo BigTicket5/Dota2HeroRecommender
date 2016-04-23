@@ -263,7 +263,7 @@ label {
 }
 
 /* Caption of Modal Image */
-#caption {
+.caption {
 	margin: auto;
 	display: block;
 	width: 80%;
@@ -276,7 +276,7 @@ label {
 }
 
 /* Add Animation */
-.modal-content, #caption {
+.modal-content, .caption {
 	-webkit-animation-name: zoom;
 	-webkit-animation-duration: 0.6s;
 	animation-name: zoom;

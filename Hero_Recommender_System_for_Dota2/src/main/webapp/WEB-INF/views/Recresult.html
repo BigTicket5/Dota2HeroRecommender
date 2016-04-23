@@ -12,7 +12,6 @@
 		var modal = document.getElementById('myModal');
 
 		// Get the image and insert it inside the modal - use its "alt" text as a caption
-		var captionText = $("#caption");
 		$('.myImg').click(function() {
 			modal.style.display = "block";
 			var path = $(this).attr("src");
@@ -20,8 +19,16 @@
 			path = path.replace("img","img/largeimg");
 			$("#imgsx").attr("src", path);
 			var imgalt = new Number($(this).attr("alt"));
-			$("#caption").html("Your predicted contribution of \""+$(this).attr("name")+"\" is "+
-					imgalt.toFixed(4));
+			if($(this).attr("id")=='predict')
+			{
+				$(".caption").html("Your predicted contribution of \""+$(this).attr("name")+"\" is "+
+						imgalt.toFixed(4));	
+			}
+			else
+			{
+				$(".caption").html("Your contribution of \""+$(this).attr("name")+"\" is "+
+						imgalt.toFixed(4));
+			}
 
 		});
 		$('.close').click(function() {
@@ -44,13 +51,13 @@
 				th:each="ori :${resori}">
 				<table>
 					<tr>
-						<td><img class="myImg" th:name="${ori.Heroname}"
+						<td><img id="ori" class="myImg" th:name="${ori.Heroname}"
 							th:src="@{/resources/img/}+${ori.Heroname}+@{.png}"
 							th:alt="${ori.contribution}" />
 							<div id="myModal" class="modal">
 								<span class="close">X</span> <img class="modal-content"
 									id="imgsx" />
-								<div id="caption"></div>
+								<div class="caption" ></div>
 							</div></td>
 					</tr>
 				</table>
@@ -58,18 +65,18 @@
 		</div>
 		<div style="width: 1055px; margin: 0 auto;">
 			<p />
-			<h1>Cosin Similarity</h1>
+			<h1>Cosin Similarity Recommender</h1>
 			<div class="blur" style="float: left; cursor: pointer;"
 				th:each="con :${rescon}">
 				<table>
 					<tr>
-						<td><img class="myImg" th:name="${con.Heroname}"
+						<td><img id="predict" class="myImg" th:name="${con.Heroname}"
 							th:src="@{/resources/img/}+${con.Heroname}+@{.png}"
 							th:alt="${con.contribution}" />
 							<div id="myModal" class="modal">
 								<span class="close">X</span> <img class="modal-content"
 									id="imgsx" />
-								<div id="caption"></div>
+								<div class="caption"></div>
 							</div></td>
 					</tr>
 				</table>
@@ -77,18 +84,18 @@
 		</div>
 		<div style="width: 1055px; margin: 0 auto;">
 			<p />
-			<h1>Person Similarity</h1>
+			<h1>Person Similarity Recommender</h1>
 			<div class="blur" style="float: left; cursor: pointer;"
 				th:each="per :${resper}">
 				<table>
 					<tr>
-						<td><img class="myImg" th:name="${per.Heroname}"
+						<td><img id="predict" class="myImg" th:name="${per.Heroname}"
 							th:src="@{/resources/img/}+${per.Heroname}+@{.png}"
 							th:alt="${per.contribution}" />
 							<div id="myModal" class="modal">
 								<span class="close">X</span> <img class="modal-content"
 									id="imgsx" />
-								<div id="caption"></div>
+								<div class="caption"></div>
 							</div></td>
 					</tr>
 				</table>

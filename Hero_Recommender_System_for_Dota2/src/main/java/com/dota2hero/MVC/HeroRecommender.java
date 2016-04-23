@@ -14,26 +14,25 @@ import com.google.gson.stream.JsonReader;
 
 public class HeroRecommender {
 	private static DataBase db;
+	private static HashMap<String,String> heromap;
 	public HeroRecommender() throws FileNotFoundException
 	{
 		HeroRecommender.db = new DataReader("src/main/java/test.csv");
-	}
-	public static void main(String[] args) throws FileNotFoundException {
-		top5HistoryHeros("23");
-	}
-	
-	public static List<RecommenderResult> top5HistoryHeros(String playerId) throws FileNotFoundException {
-		DataReader originalData = new DataReader("src/main/java/test.csv");
 		HashMap<String,String> hlist = new HashMap<String,String>();
 		for(int i=0;i<getHero().size();i++)
 		{
 			hlist.put(getHero().get(i).getId(), getHero().get(i).getLocalized_name());
 		}
+		HeroRecommender.heromap = hlist;
+	}
+	
+	public static List<RecommenderResult> top5HistoryHeros(String playerId) throws FileNotFoundException {
+		DataReader originalData = new DataReader("src/main/java/test.csv");
 		List<Contribution> l = originalData.getContributions();
 		List<RecommenderResult> specificIdContributions = new ArrayList<RecommenderResult>();
 		for(Contribution c : l) {
 			if(c.getPlayerId().equals(playerId)) {
-				RecommenderResult tmpr = new RecommenderResult(c.getPlayerId(),hlist.get(c.getHeroId()),c.getContribution());
+				RecommenderResult tmpr = new RecommenderResult(c.getPlayerId(),heromap.get(c.getHeroId()),c.getContribution());
 				specificIdContributions.add(tmpr);
 			}
 		}
@@ -43,9 +42,6 @@ public class HeroRecommender {
 						rr2.getContribution());
 			}
 		});
-		for(RecommenderResult c : specificIdContributions.subList(0, 5)) {
-			System.out.println(c.toString());
-		}
 		return specificIdContributions.subList(0, 5);
 	}
 
@@ -99,17 +95,12 @@ public class HeroRecommender {
 	
 	public static List<RecommenderResult> getResult(List<Contribution> LC) throws FileNotFoundException
 	{
-		HashMap<String,String> hlist = new HashMap<String,String>();
-		for(int i=0;i<getHero().size();i++)
-		{
-			hlist.put(getHero().get(i).getId(), getHero().get(i).getLocalized_name());
-		}
 		List<RecommenderResult>  l = new ArrayList<RecommenderResult>();
 		if(LC!=null)
 		{
 			for(int i =0;i<LC.size();i++)
 			{
-				RecommenderResult rr = new RecommenderResult(LC.get(i).getPlayerId(),hlist.get(
+				RecommenderResult rr = new RecommenderResult(LC.get(i).getPlayerId(),heromap.get(
 						LC.get(i).getHeroId()),LC.get(i).getContribution());
 				l.add(rr);
 			}
