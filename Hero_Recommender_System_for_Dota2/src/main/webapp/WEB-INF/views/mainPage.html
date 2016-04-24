@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" href="resources/css/style.css"/>
+<link rel="stylesheet" href="resources/css/loading.css"/>
 <script type="text/javascript"
 	src="resources/scripts/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="resources/scripts/jquery-ui.min.js"></script>
@@ -47,6 +48,18 @@
 							console.log("2");
 							validator.resetForm();
 							$('#accform')[0].reset();
+						});
+						$('#accform').submit(function() {
+						    $('.loader').css('visibility', 'visible');
+						    var ltop = parseInt($(".cd-user-modal-container").offset().top,10)+parseInt($(".cd-user-modal-container").outerHeight(true),10)+40;
+						    $('.loader').css('margin-top',ltop+'px');
+						    $('#submit').css('background-color','#E8E8E8');
+						    $('#submit').css('cursor','default');
+						    $('#submit').prop("disabled", true);
+							$('#clearform').css('background-color','#E8E8E8');
+							$('#clearform').css('cursor','default');
+							$('#clearform').prop("disabled", true);
+						    return true;
 						});
 					});
 	function setpCenter(pName) {
@@ -131,6 +144,7 @@
 					</form>
 				</div>
 			</div>
+			<div class="loader"></div>
 		</div>
 	</div>
 	<footer>Copyright 2016 Zhang and Mao </footer>
