@@ -39,7 +39,7 @@ public class HeroRecommender {
 		Collections.sort(specificIdContributions, new Comparator<RecommenderResult>() {
 			public int compare(RecommenderResult rr1, RecommenderResult rr2) {
 				return Double.compare(rr2.getContribution(),
-						rr2.getContribution());
+						rr1.getContribution());
 			}
 		});
 		return specificIdContributions.subList(0, 5);
