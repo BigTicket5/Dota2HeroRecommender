@@ -30,6 +30,15 @@
 								$form_modal.removeClass('is-visible');
 							}
 						});
+						$(document).keyup(function(event){
+							if(event.which == '113'){
+								if($("#bgVideo").prop('muted')){
+									 $("#bgVideo").prop('muted', false);
+								}else{
+									$("#bgVideo").prop('muted', true);
+								}
+							}
+						});
 						$('#accountid').on('input', function() {
 							this.value = this.value.replace(/[^0-9\.]/g, '');
 						});
