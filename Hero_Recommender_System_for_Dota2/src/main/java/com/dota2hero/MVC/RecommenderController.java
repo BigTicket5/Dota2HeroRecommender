@@ -1,5 +1,6 @@
 package com.dota2hero.MVC;
 
+import org.apache.spark.mllib.recommendation.Rating;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -48,11 +49,13 @@ public class RecommenderController {
 	// Return result
 	@RequestMapping(value="/Recresult" , method = RequestMethod.GET)
 	public String Recresult(@ModelAttribute("inPlayer") Player player,Model model) throws FileNotFoundException {
+		List<Rating> sparkRecommend = SparkHeroRecommender.getRecommendResult(Integer.valueOf(player.getPlayerId()));
 		List<Contribution> listcon =HeroRecommender.recommendBasedCosineSimilarity(player.getPlayerId());
 		List<Contribution> listperson = HeroRecommender.recommendBasedPearsonCorrelationSimilarity(player.getPlayerId());
 		List<RecommenderResult> lcr = HeroRecommender.getResult(listcon);
 		List<RecommenderResult> lpr = HeroRecommender.getResult(listperson);
 		List<RecommenderResult> ori = HeroRecommender.top5HistoryHeros(player.getPlayerId());
+//		List<RecommenderResult> sparkRes = SparkHeroRecommender.getResult(sparkRecommend);
 		model.addAttribute("rescon", lcr);
 		model.addAttribute("resper", lpr);
 		model.addAttribute("resori", ori);
