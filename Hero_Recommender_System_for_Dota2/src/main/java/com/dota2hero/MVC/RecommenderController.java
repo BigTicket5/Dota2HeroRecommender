@@ -50,15 +50,16 @@ public class RecommenderController {
 	@RequestMapping(value="/Recresult" , method = RequestMethod.GET)
 	public String Recresult(@ModelAttribute("inPlayer") Player player,Model model) throws FileNotFoundException {
 		List<Rating> sparkRecommend = SparkHeroRecommender.getRecommendResult(Integer.valueOf(player.getPlayerId()));
-		List<Contribution> listcon =HeroRecommender.recommendBasedCosineSimilarity(player.getPlayerId());
-		List<Contribution> listperson = HeroRecommender.recommendBasedPearsonCorrelationSimilarity(player.getPlayerId());
-		List<RecommenderResult> lcr = HeroRecommender.getResult(listcon);
-		List<RecommenderResult> lpr = HeroRecommender.getResult(listperson);
-		List<RecommenderResult> ori = HeroRecommender.top5HistoryHeros(player.getPlayerId());
+		System.out.println(sparkRecommend.get(1).rating());
+//		List<Contribution> listcon =HeroRecommender.recommendBasedCosineSimilarity(player.getPlayerId());
+//		List<Contribution> listperson = HeroRecommender.recommendBasedPearsonCorrelationSimilarity(player.getPlayerId());
+//		List<RecommenderResult> lcr = HeroRecommender.getResult(listcon);
+//		List<RecommenderResult> lpr = HeroRecommender.getResult(listperson);
+//		List<RecommenderResult> ori = HeroRecommender.top5HistoryHeros(player.getPlayerId());
 //		List<RecommenderResult> sparkRes = SparkHeroRecommender.getResult(sparkRecommend);
-		model.addAttribute("rescon", lcr);
-		model.addAttribute("resper", lpr);
-		model.addAttribute("resori", ori);
+//		model.addAttribute("rescon", lcr);
+//		model.addAttribute("resper", lpr);
+//		model.addAttribute("resori", ori);
 		return "Recresult";
 	}
 

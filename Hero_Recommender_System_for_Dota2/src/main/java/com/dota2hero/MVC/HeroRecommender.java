@@ -19,9 +19,10 @@ public class HeroRecommender {
 	{
 		HeroRecommender.db = new DataReader("src/main/java/test.csv");
 		HashMap<String,String> hlist = new HashMap<String,String>();
-		for(int i=0;i<getHero().size();i++)
+		List<Hero> herol = getHero();
+		for(int i=0;i<herol.size();i++)
 		{
-			hlist.put(getHero().get(i).getId(), getHero().get(i).getLocalized_name());
+			hlist.put(herol.get(i).getId(),herol.get(i).getLocalized_name());
 		}
 		HeroRecommender.heromap = hlist;
 	}

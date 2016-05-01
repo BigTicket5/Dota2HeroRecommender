@@ -8,16 +8,30 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>1.6</java-version>
+		<java-version>1.8</java-version>
 		<org.springframework-version>3.2.8.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-	<dependency>
+		<dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.11</artifactId>
             <version>1.4.1</version>
+           	 <exclusions>
+           	 	<exclusion>
+		            <groupId>javax.servlet</groupId>
+		            <artifactId>javax.servlet-api</artifactId>
+		        </exclusion>
+		        <exclusion>
+		            <groupId>org.glassfish</groupId>
+		            <artifactId>javax.servlet</artifactId>
+		        </exclusion>
+		        <exclusion>
+		            <groupId>org.eclipse.jetty.orbit</groupId>
+		            <artifactId>javax.servlet</artifactId>
+		        </exclusion>
+    		</exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
@@ -124,20 +138,8 @@
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
 		</dependency>
 
 		<!-- Test -->
@@ -153,6 +155,12 @@
 			<artifactId>thymeleaf-spring4</artifactId>
 			<version>2.1.4.RELEASE</version>
 		</dependency>
+		<!-- jetty  -->
+		 <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>9.3.3.v20150827</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -190,6 +198,21 @@
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
 			</plugin>
+			 <plugin>
+		        <groupId>org.eclipse.jetty</groupId>
+		        <artifactId>jetty-maven-plugin</artifactId>
+		        <version>9.3.3.v20150827</version>
+		        <configuration>
+                    <httpConnector>
+                        <port>8080</port>
+                        <host>localhost</host>
+                    </httpConnector>
+                    <webApp>
+		     			<contextPath>/Recommender</contextPath>
+					</webApp>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                </configuration>
+      		</plugin>
 		</plugins>
 	</build>
 </project>
