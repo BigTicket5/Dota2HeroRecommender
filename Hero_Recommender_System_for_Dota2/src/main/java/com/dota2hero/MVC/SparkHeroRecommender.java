@@ -39,6 +39,10 @@ public class SparkHeroRecommender {
     private static JavaSparkContext sc;
     private static HashMap<String,String> heromap;
     
+    public static void main(String[] args) {
+    	getRecommendResult(62);
+    }
+    
     public SparkHeroRecommender() throws FileNotFoundException
 	{
 		HashMap<String,String> hlist = new HashMap<String,String>();
@@ -61,7 +65,7 @@ public class SparkHeroRecommender {
         //Reading external data
         final JavaRDD<String> ratingData = sc.textFile(RESOURCE_PATH + RATINGS_FILE_NAME);
         JavaRDD<String> productData = sc.textFile(RESOURCE_PATH + MOVIES_FILE_NAME);
-
+//
         JavaRDD<Tuple2<Integer, Rating>> ratings = ratingData.map(
                 new Function<String, Tuple2<Integer, Rating>>() {
                     public Tuple2<Integer, Rating> call(String s) throws Exception {
@@ -81,113 +85,21 @@ public class SparkHeroRecommender {
                     }
                 }
         ).collectAsMap();
-
-        long ratingCount = ratings.count();
-        long userCount = ratings.map(
-                new Function<Tuple2<Integer, Rating>, Object>() {
-                    public Object call(Tuple2<Integer, Rating> tuple) throws Exception {
-                        return tuple._2().user();
-                    }
-                }
-        ).distinct().count();
-
-        long movieCount = ratings.map(
-                new Function<Tuple2<Integer, Rating>, Object>() {
-                    public Object call(Tuple2<Integer, Rating> tuple) throws Exception {
-                        return tuple._2().product();
-                    }
-                }
-        ).distinct().count();
-
-        System.out.println("Got " + ratingCount + " ratings from "
-                + userCount + " users on " + movieCount + " products.");
-
-        //Splitting training data
-        int numPartitions = 10;
-        //training data set
-        JavaRDD<Rating> training = ratings.filter(
-                new Function<Tuple2<Integer, Rating>, Boolean>() {
-                    public Boolean call(Tuple2<Integer, Rating> tuple) throws Exception {
-                        return tuple._1() < 6;
-                    }
-                }
-        ).map(
-                new Function<Tuple2<Integer, Rating>, Rating>() {
-                    public Rating call(Tuple2<Integer, Rating> tuple) throws Exception {
-                        return tuple._2();
-                    }
-                }
-        ).repartition(numPartitions).cache();
-
-        StorageLevel storageLevel = new StorageLevel();
-        //validation data set
-        JavaRDD<Rating> validation = ratings.filter(
-                new Function<Tuple2<Integer, Rating>, Boolean>() {
-                    public Boolean call(Tuple2<Integer, Rating> tuple) throws Exception {
-                        return tuple._1() >= 6 && tuple._1() < 8;
-                    }
-                }
-        ).map(
-                new Function<Tuple2<Integer, Rating>, Rating>() {
-                    public Rating call(Tuple2<Integer, Rating> tuple) throws Exception {
-                        return tuple._2();
-                    }
-                }
-        ).repartition(numPartitions).persist(storageLevel);
-
-        //test data set
-        JavaRDD<Rating> test = ratings.filter(
-                new Function<Tuple2<Integer, Rating>, Boolean>() {
-                    public Boolean call(Tuple2<Integer, Rating> tuple) throws Exception {
-                        return tuple._1() >= 8;
-                    }
-                }
-        ).map(
-                new Function<Tuple2<Integer, Rating>, Rating>() {
-                    public Rating call(Tuple2<Integer, Rating> tuple) throws Exception {
-                        return tuple._2();
-                    }
-                }
-        ).persist(storageLevel);
-
-        long numTraining = training.count();
-        long numValidation = validation.count();
-        long numTest = test.count();
-
-        System.out.println("Training: " + numTraining + ", validation: " + numValidation + ", test: " + numTest);
-
-        //training model
-        int[] ranks = {8, 12};
-        float[] lambdas = {0.1f, 10.0f};
-        int[] numIters = {10, 20};
-
-        double bestValidationRmse = Double.MAX_VALUE;
-        int bestRank = 0;
-        float bestLambda = -1.0f;
-        int bestNumIter = -1;
-        MatrixFactorizationModel bestModel = null;
-
         System.out.println("Loading model");
-        bestModel = MatrixFactorizationModel.load(sc.sc(), "/Users/zh355245849/Desktop/recommend");
-        List<Rating> recommendations = getRecommendations(1, bestModel, ratings, products);
-
-        //Printing Recommendations
+        MatrixFactorizationModel bestModel = MatrixFactorizationModel.load(sc.sc(), "src/main/java");
+        List<Rating> recommendations = getRecommendations(userId, bestModel, ratings, products);
         for (Rating recommendation : recommendations) {
             if (products.containsKey(recommendation.product())) {
-                System.out.println(recommendation.product() + " " + products.get(recommendation.product()));
+                System.out.println(recommendation.user() + " " + recommendation.product() + " " + products.get(recommendation.product()));
             }
         }
         return recommendations;
 
     }
-
-    
-      //Returns the list of recommendations for a given user
     
     private static List<Rating> getRecommendations(final int userId, MatrixFactorizationModel model, JavaRDD<Tuple2<Integer, Rating>> ratings, Map<Integer, String> products) {
         List<Rating> recommendations;
 
-        //Getting the users ratings
         JavaRDD<Rating> userRatings = ratings.filter(
                 new Function<Tuple2<Integer, Rating>, Boolean>() {
                     public Boolean call(Tuple2<Integer, Rating> tuple) throws Exception {
@@ -244,7 +156,7 @@ public class SparkHeroRecommender {
             }
         });
 
-        //get top 50 from the recommended products.
+        //get top 5 from the recommended products.
         recommendations = recommendations.subList(0, 5);
 
         return recommendations;
