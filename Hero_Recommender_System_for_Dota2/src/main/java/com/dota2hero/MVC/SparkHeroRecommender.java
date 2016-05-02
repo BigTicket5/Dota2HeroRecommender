@@ -1,5 +1,6 @@
 package com.dota2hero.MVC;
 import org.apache.log4j.Level;
+
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaDoubleRDD;
@@ -23,11 +24,13 @@ import com.google.gson.stream.JsonReader;
 import scala.Tuple2;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
+
 
 public class SparkHeroRecommender {
     public static final String LINE_SEPERATOR = " ";
@@ -61,11 +64,15 @@ public class SparkHeroRecommender {
         //Initializing Spark
         SparkConf conf = new SparkConf().setAppName(APP_NAME).setMaster(CLUSTER);
         sc = new JavaSparkContext(conf);
+        File dir1 = new File("src/main/java/data");
+        File dir2 = new File("src/main/java/metadata");
 
+        if(!dir1.exists() && !dir2.exists())
+        	CollaborativeFiltering.buildCollaborativeFilteringModel(conf, sc);
         //Reading external data
         final JavaRDD<String> ratingData = sc.textFile(RESOURCE_PATH + RATINGS_FILE_NAME);
         JavaRDD<String> productData = sc.textFile(RESOURCE_PATH + MOVIES_FILE_NAME);
-//
+
         JavaRDD<Tuple2<Integer, Rating>> ratings = ratingData.map(
                 new Function<String, Tuple2<Integer, Rating>>() {
                     public Tuple2<Integer, Rating> call(String s) throws Exception {

@@ -10,9 +10,7 @@ import org.apache.spark.mllib.recommendation.Rating;
 import org.apache.spark.SparkConf;
 
 public class CollaborativeFiltering {
-    public static void main(String[] args) {
-        SparkConf conf = new SparkConf().setAppName("Collaborative Filtering Example").setMaster("local");
-        JavaSparkContext sc = new JavaSparkContext(conf);
+    public static void buildCollaborativeFilteringModel(SparkConf conf, JavaSparkContext sc) {
 
         // Load and parse the data
         String path = "src/main/java/testSpark.txt";
