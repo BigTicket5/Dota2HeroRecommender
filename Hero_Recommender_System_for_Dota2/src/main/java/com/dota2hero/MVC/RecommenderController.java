@@ -73,8 +73,12 @@ public class RecommenderController {
 	public String Sparkresult(@ModelAttribute("inPlayer") Player player,Model model) throws FileNotFoundException {
 		List<Rating> sparkRecommend = SparkHeroRecommender.getRecommendResult(Integer.valueOf(player.getPlayerId()));
 		List<RecommenderResult> ori = HeroRecommender.top5HistoryHeros(player.getPlayerId());
+		for(Rating r : sparkRecommend) {
+			System.out.println(String.valueOf(r.user()) + " " + String.valueOf(r.product()));
+			System.out.println(r.user() + " " + r.product() + " " + r.rating());
+		}
 		List<RecommenderResult> sparkRes = SparkHeroRecommender.getResult(sparkRecommend);
-		model.addAttribute("resspark", sparkRes);
+		//model.addAttribute("resspark", sparkRes);
 		model.addAttribute("resori", ori);
 		return "Sparkresult";
 	}

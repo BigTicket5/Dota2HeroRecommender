@@ -95,11 +95,11 @@ public class SparkHeroRecommender {
         System.out.println("Loading model");
         MatrixFactorizationModel bestModel = MatrixFactorizationModel.load(sc.sc(), "src/main/java");
         List<Rating> recommendations = getRecommendations(userId, bestModel, ratings, products);
-        for (Rating recommendation : recommendations) {
-            if (products.containsKey(recommendation.product())) {
-                System.out.println(recommendation.user() + " " + recommendation.product() + " " + products.get(recommendation.product()));
-            }
-        }
+//        for (Rating recommendation : recommendations) {
+//            if (products.containsKey(recommendation.product())) {
+//                System.out.println(recommendation.user() + " " + recommendation.product() + " " + recommendation.rating());
+//            }
+//        }
         return recommendations;
 
     }
@@ -184,11 +184,12 @@ public class SparkHeroRecommender {
 		List<RecommenderResult>  l = new ArrayList<RecommenderResult>();
 		if(LC!=null)
 		{
-			for(int i =0;i<LC.size();i++)
+			for(Rating r : LC)
 			{
-				RecommenderResult rr = new RecommenderResult(String.valueOf(LC.get(i).user()),heromap.get(
-						LC.get(i).product()),LC.get(i).rating());
-				l.add(rr);
+				System.out.println(heromap.get(String.valueOf(r.product())));
+//				RecommenderResult rr = new RecommenderResult(String.valueOf(r.user()),heromap.get(
+//						String.valueOf(r.product())),r.rating());
+//				l.add(rr);
 			}
 		}
 		return l;	
