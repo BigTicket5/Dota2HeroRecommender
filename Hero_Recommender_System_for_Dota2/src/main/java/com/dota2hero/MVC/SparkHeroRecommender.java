@@ -42,18 +42,21 @@ public class SparkHeroRecommender {
     private static JavaSparkContext sc;
     private static HashMap<String,String> heromap;
     
-    public static void main(String[] args) {
-    	getRecommendResult(62);
+    public static void main(String[] args) throws FileNotFoundException {
+    	SparkHeroRecommender s = new SparkHeroRecommender();
+    	SparkHeroRecommender.getRecommendResult(62);
     }
     
     public SparkHeroRecommender() throws FileNotFoundException
 	{
 		HashMap<String,String> hlist = new HashMap<String,String>();
-		for(int i=0;i<getHero().size();i++)
+		List<Hero> herol = getHero();
+		for(int i=0;i<herol.size();i++)
 		{
-			hlist.put(getHero().get(i).getId(), getHero().get(i).getLocalized_name());
+			hlist.put(herol.get(i).getId(),herol.get(i).getLocalized_name());
 		}
-		SparkHeroRecommender.heromap = hlist;
+		System.out.println(hlist.size());
+		heromap = hlist;
 	}
 
     public static List<Rating> getRecommendResult(int userId) {
@@ -62,7 +65,7 @@ public class SparkHeroRecommender {
         Logger.getLogger("akka").setLevel(Level.OFF);
 
         //Initializing Spark
-        SparkConf conf = new SparkConf().setAppName(APP_NAME).setMaster(CLUSTER);
+        SparkConf conf = new SparkConf().setAppName(APP_NAME).setMaster(CLUSTER).set("spark.driver.allowMultipleContexts", "true");
         sc = new JavaSparkContext(conf);
         File dir1 = new File("src/main/java/data");
         File dir2 = new File("src/main/java/metadata");
@@ -164,6 +167,7 @@ public class SparkHeroRecommender {
         });
 
         //get top 5 from the recommended products.
+        System.out.println(recommendations.size());
         recommendations = recommendations.subList(0, 5);
 
         return recommendations;
@@ -179,17 +183,19 @@ public class SparkHeroRecommender {
 		List<Hero> hlist =  gson.fromJson(jArray, REVIEW_TYPE);
 		return hlist;
 	}
-    public static List<RecommenderResult> getResult(List<Rating> LC) throws FileNotFoundException
+    public List<RecommenderResult> getResult(List<Rating> LC) throws FileNotFoundException
 	{
+//    	for(Map.Entry me : heromap.entrySet()) {
+//    	    System.out.println(me.getKey() +  ": " + me.getValue());
+//    	}
 		List<RecommenderResult>  l = new ArrayList<RecommenderResult>();
 		if(LC!=null)
 		{
 			for(Rating r : LC)
 			{
-				System.out.println(heromap.get(String.valueOf(r.product())));
-//				RecommenderResult rr = new RecommenderResult(String.valueOf(r.user()),heromap.get(
-//						String.valueOf(r.product())),r.rating());
-//				l.add(rr);
+				//System.out.println(r.product());
+				RecommenderResult rr = new RecommenderResult(String.valueOf(r.user()), heromap.get(String.valueOf(r.product())),r.rating());
+				l.add(rr);
 			}
 		}
 		return l;	

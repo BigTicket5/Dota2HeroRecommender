@@ -19,8 +19,8 @@ public class CollaborativeFiltering {
                 new Function<String, Rating>() {
                     public Rating call(String s) {
                         String[] sarray = s.split("\t");
-                        return new Rating(Integer.parseInt(sarray[1]), Integer.parseInt(sarray[2]),
-                                Double.parseDouble(sarray[0]));
+                        return new Rating(Integer.parseInt(sarray[0]), Integer.parseInt(sarray[1]),
+                                Double.parseDouble(sarray[2]));
                     }
                 }
         );

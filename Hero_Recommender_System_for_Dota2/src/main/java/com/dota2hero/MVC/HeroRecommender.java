@@ -15,9 +15,9 @@ import com.google.gson.stream.JsonReader;
 public class HeroRecommender {
 	private static DataBase db;
 	private static HashMap<String,String> heromap;
-	public HeroRecommender() throws FileNotFoundException
+	public HeroRecommender(String path) throws FileNotFoundException
 	{
-		HeroRecommender.db = new DataReader("src/main/java/test.csv");
+		HeroRecommender.db = new DataReader(path);
 		HashMap<String,String> hlist = new HashMap<String,String>();
 		List<Hero> herol = getHero();
 		for(int i=0;i<herol.size();i++)
@@ -26,9 +26,14 @@ public class HeroRecommender {
 		}
 		HeroRecommender.heromap = hlist;
 	}
+	public static void main(String[] args) {
+		for(Map.Entry me : heromap.entrySet()) {
+    	    System.out.println(me.getKey() +  ": " + me.getValue());
+    	}
+	}
 	
-	public static List<RecommenderResult> top5HistoryHeros(String playerId) throws FileNotFoundException {
-		DataReader originalData = new DataReader("src/main/java/test.csv",2);
+	public static List<RecommenderResult> top5HistoryHeros(String playerId, String path) throws FileNotFoundException {
+		DataReader originalData = new DataReader(path,2);
 		List<Contribution> l = originalData.getContributions();
 		List<RecommenderResult> specificIdContributions = new ArrayList<RecommenderResult>();
 		for(Contribution c : l) {

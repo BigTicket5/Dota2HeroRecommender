@@ -2,6 +2,8 @@ package com.dota2hero.MVC;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.opencsv.CSVReader;
@@ -9,7 +11,12 @@ public class DataReader extends DataBase {
 	List<Contribution> contributions2 = new ArrayList<Contribution>();
 	public DataReader(String filename,int x){
 		super();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date));
 		loadPlayersAndHeros(filename);
+		Date date2 = new Date();
+		System.out.println(dateFormat.format(date2));
 	}
 	public DataReader(String filename) {
 		super();
