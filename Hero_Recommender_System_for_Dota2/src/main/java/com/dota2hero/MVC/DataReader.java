@@ -7,6 +7,10 @@ import java.util.*;
 import com.opencsv.CSVReader;
 public class DataReader extends DataBase {
 	List<Contribution> contributions2 = new ArrayList<Contribution>();
+	public DataReader(String filename,int x){
+		super();
+		loadPlayersAndHeros(filename);
+	}
 	public DataReader(String filename) {
 		super();
 		loadData(filename);
@@ -14,12 +18,8 @@ public class DataReader extends DataBase {
 
 	private void loadData(String filename) {
 		// TODO Auto-generated method stub
-		java.util.Date date = new java.util.Date();
-		System.out.println(new Timestamp(date.getTime()));
 		loadPlayersAndHeros(filename);
-		java.util.Date date2 = new java.util.Date();
-		System.out.println(new Timestamp(date2.getTime()));
-		//loadContributionsWithZeroContribution();
+		loadContributionsWithZeroContribution();
 			
 //			int i = 0;
 //			for(Contribution c : contributions) {
@@ -49,10 +49,10 @@ public class DataReader extends DataBase {
 				heros.add(h);
 			double tmp = Double.parseDouble(row[2]);
 			Contribution c = new Contribution(row[0], row[1], tmp);
-			//Contribution c2 = new Contribution(row[0], row[1]);
+			Contribution c2 = new Contribution(row[0], row[1]);
 			if(!contributions.contains(c)) {
 				contributions.add(c);
-				//contributions2.add(c2);
+				contributions2.add(c2);
 			}
 		}
 		csvReader.close();

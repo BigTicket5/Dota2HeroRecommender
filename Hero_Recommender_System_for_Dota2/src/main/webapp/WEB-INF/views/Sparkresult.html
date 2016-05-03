@@ -63,33 +63,14 @@
 		</div>
 		<div style="width: 1055px; margin: 0 auto;">
 			<p />
-			<h1>Cosin Similarity Recommender</h1>
+			<h1>Cosin Similarity Recommender using Spark</h1>
 			<div class="blur" style="float: left; cursor: pointer;"
-				th:each="con :${rescon}">
+				th:each="spk :${sparkRes}">
 				<table>
 					<tr>
-						<td><img id="predict" class="myImg" th:name="${con.Heroname}"
-							th:src="@{/resources/img/}+${con.Heroname}+@{.png}"
-							th:alt="${con.contribution}" />
-							<div id="myModal" class="modal">
-								<span class="close">X</span> <img class="modal-content"
-									id="imgsx" />
-								<div class="caption"></div>
-							</div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<div style="width: 1055px; margin: 0 auto;">
-			<p />
-			<h1>Pearson Similarity Recommender</h1>
-			<div class="blur" style="float: left; cursor: pointer;"
-				th:each="per :${resper}">
-				<table>
-					<tr>
-						<td><img id="predict" class="myImg" th:name="${per.Heroname}"
-							th:src="@{/resources/img/}+${per.Heroname}+@{.png}"
-							th:alt="${per.contribution}" />
+						<td><img id="predict" class="myImg" th:name="${spk.Heroname}"
+							th:src="@{/resources/img/}+${spk.Heroname}+@{.png}"
+							th:alt="${spk.contribution}" />
 							<div id="myModal" class="modal">
 								<span class="close">X</span> <img class="modal-content"
 									id="imgsx" />

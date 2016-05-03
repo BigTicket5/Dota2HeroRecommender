@@ -179,18 +179,18 @@ public class SparkHeroRecommender {
 		List<Hero> hlist =  gson.fromJson(jArray, REVIEW_TYPE);
 		return hlist;
 	}
-//    public static List<RecommenderResult> getResult(List<Rating> LC) throws FileNotFoundException
-//	{
-//		List<RecommenderResult>  l = new ArrayList<RecommenderResult>();
-//		if(LC!=null)
-//		{
-//			for(int i =0;i<LC.size();i++)
-//			{
-//				RecommenderResult rr = new RecommenderResult(LC.get(i).user(),heromap.get(
-//						LC.get(i).product()),LC.get(i).rating());
-//				l.add(rr);
-//			}
-//		}
-//		return l;	
-//	}
+    public static List<RecommenderResult> getResult(List<Rating> LC) throws FileNotFoundException
+	{
+		List<RecommenderResult>  l = new ArrayList<RecommenderResult>();
+		if(LC!=null)
+		{
+			for(int i =0;i<LC.size();i++)
+			{
+				RecommenderResult rr = new RecommenderResult(String.valueOf(LC.get(i).user()),heromap.get(
+						LC.get(i).product()),LC.get(i).rating());
+				l.add(rr);
+			}
+		}
+		return l;	
+	}
 }

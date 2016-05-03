@@ -28,7 +28,7 @@ public class HeroRecommender {
 	}
 	
 	public static List<RecommenderResult> top5HistoryHeros(String playerId) throws FileNotFoundException {
-		DataReader originalData = new DataReader("src/main/java/test.csv");
+		DataReader originalData = new DataReader("src/main/java/test.csv",2);
 		List<Contribution> l = originalData.getContributions();
 		List<RecommenderResult> specificIdContributions = new ArrayList<RecommenderResult>();
 		for(Contribution c : l) {
